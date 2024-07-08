@@ -6,11 +6,11 @@ class Equipo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
     modelo_id = db.Column(db.Integer, db.ForeignKey("modelo.id"), nullable=False)
-    categoria_id = db.Column(db.Integer, db.ForeingKey("categoria.id"), nullable=False)
+    categoria_id = db.Column(db.Integer, db.ForeignKey("categoria.id"), nullable=False)
     fabricante_id = db.Column(db.Integer, db.ForeingKey("fabricante.id"), nullable=False)
-    caracteristicas_id = db.Column(db.Integer, db.ForeingKey("caracteristicas.id"), nullable=False)
-    marca_id = db.Column(db.Integer, db.ForeingKey("marca.id"), nullable=False)
-    stock_id = db.Column(db.Integer, db.ForeingKey("stock.id"), nullable=False)
+    caracteristicas_id = db.Column(db.Integer, db.ForeignKey("caracteristicas.id"), nullable=False)
+    marca_id = db.Column(db.Integer, db.ForeignKey("marca.id"), nullable=False)
+    stock_id = db.Column(db.Integer, db.ForeignKey("stock.id"), nullable=False)
     costo = db.Column(db.Float)
 
     modelo = relationship('Modelo', back_populates='equipo')
@@ -42,7 +42,7 @@ class Modelo(db.Model):
 class Marca(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
-    fabricante_id = db.Column(db.Integer, db.ForeingKey("fabricante.id"), nullable=False)
+    fabricante_id = db.Column(db.Integer, db.ForeignKey("fabricante.id"), nullable=False)
     
     
     fabricante = relationship('Fabricante', back_populates='marca')
