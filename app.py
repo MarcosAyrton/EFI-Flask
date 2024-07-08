@@ -10,7 +10,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # Agregar el from models import
-<<<<<<< HEAD
 from models import (
     Equipo,
     Modelo,
@@ -21,19 +20,13 @@ from models import (
     Proveedor,
     Accesorio
 )
-=======
->>>>>>> origin/templates
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
 @app.route("/producto")
-<<<<<<< HEAD
 def productos():
-=======
-def prendas():
->>>>>>> origin/templates
     return render_template('producto.html')
 
 @app.route("/agregar_producto")
