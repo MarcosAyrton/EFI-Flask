@@ -1,4 +1,5 @@
 from app import db
+<<<<<<< HEAD
 from sqlalchemy import Numeric, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
@@ -102,3 +103,8 @@ class Accesorio(db.Model):
     auriculares = db.Column(db.Boolean, default=True)
     funda = db.Column(db.Boolean, default=True)
     protector_de_pantalla = db.Column(db.Boolean, default=True)
+=======
+from sqlalchemy import Numeric, ForeignKey
+from sqlalchemy.orm import relationship
+
+>>>>>>> origin/templates
