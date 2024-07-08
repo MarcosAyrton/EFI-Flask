@@ -14,10 +14,10 @@ class Equipo(db.Model):
     costo = db.Column(db.Float)
 
     modelo = relationship('Modelo', back_populates='equipo')
-    categoria = relationship('Categoria', back_pupulates='equipo')
-    fabricante = relationship('Fabricante', back_pupulates='equipo')
-    caracteristicas = relationship('Caracteristicas', back_pupulates='equipo')
-    stock = relationship('Stock', back_pupulates='equipo')
+    categoria = relationship('Categoria', back_populates='equipo')
+    fabricante = relationship('Fabricante', back_populates='equipo')
+    caracteristicas = relationship('Caracteristicas', back_populates='equipo')
+    stock = relationship('Stock', back_populates='equipo')
     marca = relationship('Marca', back_populates='equipo')
 
     def _str_(self):
