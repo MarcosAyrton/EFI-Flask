@@ -7,7 +7,7 @@ class Equipo(db.Model):
     nombre = db.Column(db.String(50), nullable=False)
     modelo_id = db.Column(db.Integer, db.ForeignKey("modelo.id"), nullable=False)
     categoria_id = db.Column(db.Integer, db.ForeignKey("categoria.id"), nullable=False)
-    fabricante_id = db.Column(db.Integer, db.ForeingKey("fabricante.id"), nullable=False)
+    fabricante_id = db.Column(db.Integer, db.ForeignKey("fabricante.id"), nullable=False)
     caracteristicas_id = db.Column(db.Integer, db.ForeignKey("caracteristicas.id"), nullable=False)
     marca_id = db.Column(db.Integer, db.ForeignKey("marca.id"), nullable=False)
     stock_id = db.Column(db.Integer, db.ForeignKey("stock.id"), nullable=False)
