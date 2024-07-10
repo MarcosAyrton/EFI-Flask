@@ -1,4 +1,83 @@
-header{
+:root{
+    --cyan-300: #5bc0de;
+    --cyan-400: #31b0d5;
+    --cyan-500: #2a9fd6;
+    --cyan-600: #1d8bb2;
+
+    --gray-300: #d6d8db;
+    --gray-400: #c6c8ca;
+    --gray-500: #b8bcbf;
+    --gray-600: #6c757d;
+
+    --indigo-200: #9f7aea;
+    --indigo-300: #7e57c2;
+    --indigo-400: #673ab7;
+    --indigo-500: #5e35b1;
+    --indigo-600: #512da8;
+}
+
+
+/* Archivo: styles.css */
+
+main {
+    background-color: var(--gray-500);
     display: flex;
-    background-color: blueviolet;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    background-color: var(--cyan-400);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    background-color: var(--cyan-400);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1320px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: var(--cyan-500);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--indigo-300);
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.gray-500{
+    background: var(--gray-500);
 }
