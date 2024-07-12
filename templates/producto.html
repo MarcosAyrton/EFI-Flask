@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre del Equipo</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Fabricante</th>
+                <th>Costo</th>
+                <th>Proveedor</th>
+                <th>Accesorios</th>
+                <th>Color</th>
+                <th>Pantalla</th>
+                <th>Batería</th>
+                <th>Cámara</th>
+                <th>CPU</th>
+                <th>Software</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.modelo.nombre }}</td>
+                    <td>{{ producto.marca.nombre }}</td>
+                    <td>{{ producto.fabricante.nombre }}</td>
+                    <td>{{ producto.costo }}</td>
+                    <td>{{ producto.proveedor.nombre }}</td>
+                    <td>
+                        {% if producto.accesorios.cargador %}
+                            Cargador
+                        {% endif %}
+                        {% if producto.accesorios.auriculares %}
+                            Auriculares
+                        {% endif %}
+                        {% if producto.accesorios.funda %}
+                            Funda
+                        {% endif %}
+                        {% if producto.accesorios.protector_de_pantalla %}
+                            Protector de Pantalla
+                        {% endif %}
+                    </td>
+                    <td>{{ producto.caracteristicas.color }}</td>
+                    <td>{{ producto.caracteristicas.pantalla }}</td>
+                    <td>{{ producto.caracteristicas.bateria }}</td>
+                    <td>{{ producto.caracteristicas.camara }}</td>
+                    <td>{{ producto.caracteristicas.cpu }}</td>
+                    <td>{{ producto.caracteristicas.software }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock de Productos</title>
+    <!-- Incluye aquí tus enlaces de CSS si los tienes -->
+</head>
+<body>
+    <h1>Stock de Productos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre del Equipo</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Fabricante</th>
+                <th>Disponibilidad</th>
+                <th>Cantidad</th>
+                <th>Ubicación</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.modelo.nombre }}</td>
+                    <td>{{ producto.marca.nombre }}</td>
+                    <td>{{ producto.fabricante.nombre }}</td>
+                    <td>{{ producto.stock.disponibilidad }}</td>
+                    <td>{{ producto.stock.cantidad }}</td>
+                    <td>{{ producto.stock.ubicacion }}</td>
+                    <td>{{ producto.modelo.descripcion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+{% endblock %}
