@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+    <h2>Lista de Productos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Equipo</th>
+                <th>Modelo</th>
+                <th>Fabricante</th>
+                <th>Accesorios</th>
+                <th>Costo</th>
+                <th>Proveedor</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.marca }}</td>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.modelo }}</td>
+                <td>{{ equipo.fabricante }}</td>
+                <td>{{ equipo.accesorios }}</td>
+                <td>{{ equipo.costo }}</td>
+                <td>{{ equipo.proveedor }}</td>
+                <td>{{ equipo.stock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

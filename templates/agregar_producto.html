@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %} 
+Agregar Producto
+{% endblock %}
+
+{% block content %}
+    <h4>Agregar Producto</h4>
+
+    <form action="/agregar_producto" method="post">
+    <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Datos básicos del dispositivo:</label>
+            <input type="text" id="nombre_equipo" name="nombre_equipo" class="form-control mb-2" placeholder="Nombre del equipo">
+
+            <input type="text" id="nombre_modelo" name="nombre_modelo" class="form-control mb-2" placeholder="Nombre del modelo">
+
+            <input type="text" id="nombre_marca" name="nombre_marca" class="form-control mb-2" placeholder="Nombre de la marca">
+            
+            <label>Descripcion del producto</label>
+            <textarea id="descripcion_del_equipo" name="descripcion_del_equipo" rows="4" cols="50">
+            
+            </textarea>
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Datos del fabricante:</label>
+            <input type="text" id="nombre_fabricante" name="nombre_fabricante" class="form-control mb-2" placeholder="Nombre del fabricante">
+
+            <input type="text" id="pais_del_fabricante" name="pais_del_fabricante" class="form-control mb-2" placeholder="País del fabricante">
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Stock:</label>
+            <input type="number" id="precio" name="precio" min="50000" max="300000" class="form-control mb-2" placeholder="Precio del equipo">
+
+            <input type="text" id="ubicacion_del_equipo" name="ubicacion_del_equipo" class="form-control mb-2" placeholder="Ubicación del equipo">
+
+            <input type="number" id="cantidad_equipo" name="cantidad_equipo" min="0" max="1000" class="form-control mb-2" placeholder="Cantidad del producto">
+
+            <label>Disponibilidad:</label>
+            <select id="stock" name="stock" class="form-control mb-2">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+            </select>
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Características del dispositivo:</label>
+            <input type="text" id="color" name="color" class="form-control mb-2" placeholder="Color del equipo">
+            <input type="text" id="pantalla_tamaño" name="pantalla_tamaño" class="form-control mb-2" placeholder="Pantalla del equipo">
+            <input type="text" id="bateria" name="bateria" class="form-control mb-2" placeholder="Batería del equipo">
+            <input type="text" id="camara" name="camara" class="form-control mb-2" placeholder="Cámara del equipo">
+            <input type="text" id="cpu" name="cpu" class="form-control mb-2" placeholder="CPU del equipo">
+            <label>Tipo de sistema operativo:</label>
+            <select id="tipo_software" name="tipo_software" class="form-control mb-2">
+            <option value="Ios">Ios</option>
+            <option value="Android">Android</option>
+            </select>
+        </div>
+        </div>
+    </div>
+
+        <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Datos del proveedor:</label>
+            <input type="text" id="nombre_proveedor" name="nombre_proveedor" class="form-control mb-2" placeholder="Nombre del proveedor">
+            <input type="tel" id="numero_de_prov" name="numero_de_prov" class="form-control mb-2" placeholder="Número del proveedor">
+            <input id="provincia_prov" name="provincia_prov" class="form-control mb-2" placeholder="Provincia del proveedor">
+        </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+        <div class="col-6">
+            <label>Accesorios:</label>
+            <label>Cargador:</label>
+            <select id="cargador" name="cargador" class="form-control mb-2">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+            </select>
+
+            <label>Auriculares:</label>
+            <select id="auriculares" name="auriculares" class="form-control mb-2">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+            </select>
+
+            <label>Funda:</label>
+            <select id="funda" name="funda" class="form-control mb-2">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+            </select>
+
+            <label>Protector:</label>
+            <select id="protector" name="protector" class="form-control mb-2">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+            </select>
+        </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar Producto</button>
+    </form>
+
+{% endblock %}
