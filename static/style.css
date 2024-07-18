@@ -1,4 +1,171 @@
-header{
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+:root{
+    --cyan-300: #5bc0de;
+    --cyan-400: #31b0d5;
+    --cyan-500: #2a9fd6;
+    --cyan-600: #1d8bb2;
+
+    --gray-300: #d6d8db;
+    --gray-400: #c6c8ca;
+    --gray-500: #b8bcbf;
+    --gray-600: #6c757d;
+
+    --indigo-200: #9f7aea;
+    --indigo-300: #7e57c2;
+    --indigo-400: #673ab7;
+    --indigo-500: #5e35b1;
+    --indigo-600: #512da8;
+
+    --fuente: 'Roboto Condensed';
+}
+
+
+/* Archivo: styles.css */
+
+main {
+    background-color: var(--gray-500);
     display: flex;
-    background-color: blueviolet;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--fuente);
+}
+
+footer {
+    background-color: var(--cyan-400);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--fuente);
+}
+
+nav {
+    background-color: var(--cyan-400);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1320px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--fuente);
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: var(--fuente);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: var(--cyan-500);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-family: var(--fuente);
+}
+
+button:hover {
+    background-color: var(--indigo-300);
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: var(--fuente);
+}
+
+.gray-500{
+    background: var(--gray-500);
+}
+
+.title {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.form-label {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-nombre,
+.form-modelo,
+.form-marca,
+.form-fabricante,
+.form-fabricante,
+.form-precio,
+.form-ubi,
+.form-cant,
+.form-color,
+.form-pantalla,
+.form-bateria,
+.form-camara,
+.form-cpu,
+.form-nombre-prov,
+.form-num-prov,
+.form-provincia {
+    background-color: #f7f7f7;
+    border: hidden;
+    border-radius: 2px;
+    margin-top: 20px;
+}
+
+textarea {
+    margin-top: 10px;
+}
+
+.container-datos ul,
+.container-fabricante ul,
+.container-stock ul,
+.container-caracteristicas ul,
+.container-proveedor ul,
+.container-accesorios ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container-datos li,
+.container-fabricante li,
+.container-stock li,
+.container-caracteristicas li,
+.container-proveedor li,
+.container-accesorios li  {
+    margin-right: 10px;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.second-label {
+    margin-top: 50px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
 }

@@ -9,7 +9,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Agregar el from models import
 from models import (
     Equipo,
     Modelo,
@@ -27,7 +26,8 @@ def index():
 
 @app.route("/producto")
 def producto():
-    return render_template('producto.html')
+    equipos = Equipo.query.all()
+    return render_template('producto.html', equipos=equipos)
 
 @app.route("/agregar_producto", methods=['POST', 'GET'])
 def agregarProductos():
@@ -54,87 +54,53 @@ def agregarProductos():
         cantidad = request.form['cantidad_equipo']
         provincia = request.form['provincia_prov']
         num_prov = request.form['numero_de_prov']
-        proveedor = request.form['nombre_proveedor']
+        nombre_proveedor = request.form['nombre_proveedor']
 
-        fabricante_db = Fabricante(
-            nombre=fabricante,
-            pais_origen=pais
-        )
-        db.session.add(fabricante_db)
-        db.session.commit()
+        # Buscar o crear las instancias de los modelos relacionados
+        fabricante_db = Fabricante.query.filter_by(nombre=fabricante).first()
+        if not fabricante_db:
+            fabricante_db = Fabricante(nombre=fabricante, pais_origen=pais)
+            db.session.add(fabricante_db)
+            db.session.commit()
 
-        marca_db = Marca(
-            nombre=marca,
-            fabricante=fabricante_db
-        )
+        marca_db = Marca.query.filter_by(nombre=marca).first()
+        if not marca_db:
+            marca_db = Marca(nombre=marca, fabricante=fabricante_db)
+            db.session.add(marca_db)
+            db.session.commit()
 
-        db.session.add(marca_db)
-        db.session.commit()
+        modelo_db = Modelo.query.filter_by(nombre=modelo).first()
+        if not modelo_db:
+            modelo_db = Modelo(nombre=modelo, fabricante=fabricante_db.nombre, marca=marca_db, descripcion=descripcion_equipo)
+            db.session.add(modelo_db)
+            db.session.commit()
 
-        modelo_db = Modelo(
-            nombre=modelo,
-            fabricante=fabricante_db.nombre,
-            marca=marca_db,
-            descripcion=descripcion_equipo
-        )
-        db.session.add(modelo_db)
-        db.session.commit()
-
-        caracteristicas_db = Caracteristicas(
-            color=color,
-            pantalla=pantalla,
-            bateria=bateria,
-            camara=camara,
-            cpu=cpu,
-            software=software
-        )
+        caracteristicas_db = Caracteristicas(color=color, pantalla=pantalla, bateria=bateria, camara=camara, cpu=cpu, software=software)
         db.session.add(caracteristicas_db)
         db.session.commit()
 
-        stock_db = Stock(
-            cantidad=1 if stock == 'si' else 0,
-            disponibilidad=True if stock == 'si' else False,
-            ubicacion=ubicacion
-        )
-
+        stock_db = Stock(cantidad=cantidad, disponibilidad=True if stock == 'si' else False, ubicacion=ubicacion)
         db.session.add(stock_db)
         db.session.commit()
 
-        equipo_db = Equipo(
-            nombre=equipo,
-            modelo=modelo_db,
-            marca=marca_db,
-            fabricante=fabricante_db,
-            caracteristicas=caracteristicas_db,
-            stock=stock_db,
-            costo=float(precio)
-        )
+        proveedor_db = Proveedor.query.filter_by(nombre=nombre_proveedor).first()
+        if not proveedor_db:
+            proveedor_db = Proveedor(nombre=nombre_proveedor, num_telefono=num_prov, provincia=provincia)
+            db.session.add(proveedor_db)
+            db.session.commit()
 
-        db.session.add(equipo_db)
-        db.session.commit()
-
-        proveedor_db = Proveedor(
-            nombre=proveedor,
-            num_telefono=num_prov,
-            provincia=provincia
-        )
-        db.session.add(proveedor_db)
-        db.session.commit()
-
-        accesorios_db = Accesorio(
-            cargador=True if cargador == 'si' else False,
-            auriculares=True if auriculares == 'si' else False,
-            funda=True if funda == 'si' else False,
-            protector_de_pantalla=True if protector == 'si' else False
-        )
-
+        accesorios_db = Accesorio(cargador=True if cargador == 'si' else False, auriculares=True if auriculares == 'si' else False, funda=True if funda == 'si' else False, protector_de_pantalla=True if protector == 'si' else False)
         db.session.add(accesorios_db)
         db.session.commit()
 
-        return redirect('/stock')  # Redirige a 'Stock' una vez guardado lo ingresado
+        equipo_db = Equipo(nombre=equipo, modelo=modelo_db, marca=marca_db, fabricante=fabricante_db, caracteristicas=caracteristicas_db, stock=stock_db, costo=float(precio), proveedor=proveedor_db)
+        db.session.add(equipo_db)
+        db.session.commit()
+
+        return redirect('/producto')
     return render_template('agregar_producto.html')
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
-@app.route("/stock")
-def mostrarStock():
-    return render_template('stock.html')
+
