@@ -5,119 +5,230 @@ Agregar Producto
 {% endblock %}
 
 {% block content %}
-    <h4>Agregar Producto</h4>
-
-    <form action="/agregar_producto" method="post">
-    <div class="container">
+<h4 class="title">Agregar Producto</h4>
+<form id="productoForm">
+    <div id="card01" class="container" >
         <div class="row">
-        <div class="col-6">
-            <label>Datos básicos del dispositivo:</label>
-            <input type="text" id="nombre_equipo" name="nombre_equipo" class="form-control mb-2" placeholder="Nombre del equipo">
-
-            <input type="text" id="nombre_modelo" name="nombre_modelo" class="form-control mb-2" placeholder="Nombre del modelo">
-
-            <input type="text" id="nombre_marca" name="nombre_marca" class="form-control mb-2" placeholder="Nombre de la marca">
-            
-            <label>Descripcion del producto</label>
-            <textarea id="descripcion_del_equipo" name="descripcion_del_equipo" rows="4" cols="50">
-            
-            </textarea>
-        </div>
+            <div class="col-6 form">
+               <div class="title">Datos Basicos del Dispositivo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_equipo" name="nombre_equipo" class="form-nombre input" placeholder="Nombre del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="nombre_modelo" name="nombre_modelo" class="form-modelo input" placeholder="Nombre del modelo">
+                    </li>
+                    <li>
+                        <input type="text" id="nombre_marca" name="nombre_marca" class="form-marca input" placeholder="Nombre de la marca">
+                    </li>
+                </ul>
+                <div class="title">Descripcion del Equipo: <br><span>Comente unos detalles del equipo.</span></div>
+                <ul>
+                    <li>
+                        <textarea id="descripcion_del_equipo" name="descripcion_del_equipo" rows="4" cols="50" class="input"></textarea>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next01">Siguiente</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="card02" style="display: none;">
         <div class="row">
-        <div class="col-6">
-            <label>Datos del fabricante:</label>
-            <input type="text" id="nombre_fabricante" name="nombre_fabricante" class="form-control mb-2" placeholder="Nombre del fabricante">
-
-            <input type="text" id="pais_del_fabricante" name="pais_del_fabricante" class="form-control mb-2" placeholder="País del fabricante">
-        </div>
+            <div class="col-6 form">
+                <div class="title">Datos del Fabricante: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_fabricante" name="nombre_fabricante" class="input form-fabricante mb-2" placeholder="Nombre del fabricante">
+                    </li>
+                    <li>
+                        <input type="text" id="pais_del_fabricante" name="pais_del_fabricante" class="input form-pais mb-2" placeholder="País del fabricante">
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next02">Siguiente</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="card03" style="display: none;">
         <div class="row">
-        <div class="col-6">
-            <label>Stock:</label>
-            <input type="number" id="precio" name="precio" min="50000" max="300000" class="form-control mb-2" placeholder="Precio del equipo">
+            <div class="col-6 form">
+                <div class="title">Stock: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="number" id="precio" name="precio" min="50000" max="300000" class="input form-precio mb-2" placeholder="Precio del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="ubicacion_del_equipo" name="ubicacion_del_equipo" class="input form-ubi mb-2" placeholder="Ubicación del equipo">
+                    </li>
+                    <li>
+                        <input type="number" id="cantidad_equipo" name="cantidad_equipo" min="0" max="1000" class="input form-cant mb-2" placeholder="Cantidad del producto">
+                    </li>
+                </ul>
 
-            <input type="text" id="ubicacion_del_equipo" name="ubicacion_del_equipo" class="form-control mb-2" placeholder="Ubicación del equipo">
-
-            <input type="number" id="cantidad_equipo" name="cantidad_equipo" min="0" max="1000" class="form-control mb-2" placeholder="Cantidad del producto">
-
-            <label>Disponibilidad:</label>
-            <select id="stock" name="stock" class="form-control mb-2">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-            </select>
-        </div>
+                <div class="title">Disponibilidad: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <select id="stock" name="stock" class="input form-control mb-2">
+                            <option value="-">-</option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next03">Siguiente</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="card04" style="display: none;">
         <div class="row">
-        <div class="col-6">
-            <label>Características del dispositivo:</label>
-            <input type="text" id="color" name="color" class="form-control mb-2" placeholder="Color del equipo">
-            <input type="text" id="pantalla_tamaño" name="pantalla_tamaño" class="form-control mb-2" placeholder="Pantalla del equipo">
-            <input type="text" id="bateria" name="bateria" class="form-control mb-2" placeholder="Batería del equipo">
-            <input type="text" id="camara" name="camara" class="form-control mb-2" placeholder="Cámara del equipo">
-            <input type="text" id="cpu" name="cpu" class="form-control mb-2" placeholder="CPU del equipo">
-            <label>Tipo de sistema operativo:</label>
-            <select id="tipo_software" name="tipo_software" class="form-control mb-2">
-            <option value="Ios">Ios</option>
-            <option value="Android">Android</option>
-            </select>
-        </div>
+            <div class="col-6 form">
+                <div class="title">Características del dispositivo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="color" name="color" class="input form-color" placeholder="Color del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="pantalla_tamaño" name="pantalla_tamaño" class="input form-pantalla" placeholder="Pantalla del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="bateria" name="bateria" class="input form-bateria" placeholder="Batería del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="camara" name="camara" class="input form-camara" placeholder="Cámara del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="cpu" name="cpu" class="input form-cpu" placeholder="CPU del equipo">
+                    </li>
+                </ul>
+                <div class="title">Tipo de sistema operativo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <select id="tipo_software" name="tipo_software" class="input form-control mb-2">
+                            <option value="-">-</option>
+                            <option value="Ios">Ios</option>
+                            <option value="Android">Android</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next04">Siguiente</button>
+                </div>
+            </div>
         </div>
     </div>
 
-        <div class="container">
+    <div class="container" id="card05" style="display: none;">
         <div class="row">
-        <div class="col-6">
-            <label>Datos del proveedor:</label>
-            <input type="text" id="nombre_proveedor" name="nombre_proveedor" class="form-control mb-2" placeholder="Nombre del proveedor">
-            <input type="tel" id="numero_de_prov" name="numero_de_prov" class="form-control mb-2" placeholder="Número del proveedor">
-            <input id="provincia_prov" name="provincia_prov" class="form-control mb-2" placeholder="Provincia del proveedor">
-        </div>
+            <div class="col-6 form">
+                <div class="title">Datos del proveedor: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_proveedor" name="nombre_proveedor" class="input form-nombre-prov" placeholder="Nombre del proveedor">
+                    </li>
+                    <li>
+                        <input type="tel" id="numero_de_prov" name="numero_de_prov" class="input form-num-prov" placeholder="Número del proveedor">
+                    </li>
+                    <li>
+                        <input type="text" id="provincia_prov" name="provincia_prov" class="input form-provincia" placeholder="Provincia del proveedor">
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next05">Siguiente</button>
+                </div>
+            </div>
         </div>
     </div>
 
-
-    <div class="container">
+    <div class="container" id="card06" style="display: none;">
         <div class="row">
-        <div class="col-6">
-            <label>Accesorios:</label>
-            <label>Cargador:</label>
-            <select id="cargador" name="cargador" class="form-control mb-2">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-            </select>
+            <div class="col-6 form">
+                <div class="title">Accesorios: <br><span>Por favor complete todos los campos.</span></div>
 
-            <label>Auriculares:</label>
-            <select id="auriculares" name="auriculares" class="form-control mb-2">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-            </select>
+                <div class="title"><span>Cargador</span></div>
+                <select id="cargador" name="cargador" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
 
-            <label>Funda:</label>
-            <select id="funda" name="funda" class="form-control mb-2">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-            </select>
+                <div class="title"><span>Auriculares:</span></div>
+                <select id="auriculares" name="auriculares" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
 
-            <label>Protector:</label>
-            <select id="protector" name="protector" class="form-control mb-2">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-            </select>
-        </div>
+                <div class="title"><span>Funda:</span></div>
+                <select id="funda" name="funda" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+
+                <div class="title"><span>Protector:</span></div>
+                <select id="protector" name="protector" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+                <div class="button-container">
+                    <button type="submit" class="button-confirm" id="finalButton">Agregar Producto</button>
+                </div>
+            </div>
         </div>
     </div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = [
+            document.getElementById("card01"),
+            document.getElementById("card02"),
+            document.getElementById("card03"),
+            document.getElementById("card04"),
+            document.getElementById("card05"),
+            document.getElementById("card06")
+        ];
 
-    <button type="submit" class="btn btn-primary">Agregar Producto</button>
-    </form>
+        let currentCardIndex = 0;
 
+        const saveDataToLocalStorage = (cardIndex) => {
+            const inputs = cards[cardIndex].querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                localStorage.setItem(input.id, input.value);
+            });
+        };
+
+        const showNextCard = () => {
+            cards[currentCardIndex].style.display = 'none';
+            currentCardIndex++;
+            if (currentCardIndex < cards.length) {
+                cards[currentCardIndex].style.display = 'block';
+            }
+        };
+
+        const attachNextButtonListener = (buttonId, cardIndex) => {
+            document.getElementById(buttonId).addEventListener('click', (e) => {
+                e.preventDefault();
+                saveDataToLocalStorage(cardIndex);
+                showNextCard();
+            });
+        };
+
+        attachNextButtonListener('next01', 0);
+        attachNextButtonListener('next02', 1);
+        attachNextButtonListener('next03', 2);
+        attachNextButtonListener('next04', 3);
+        attachNextButtonListener('next05', 4);
+
+        
+    });
+</script>
 {% endblock %}
