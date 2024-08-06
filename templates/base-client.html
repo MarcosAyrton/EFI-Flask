@@ -1,11 +1,10 @@
-<!-- templates/template_base.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Tomastemarc Cell{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-client.css') }}">
 </head>
 <body class="gray-500">
     <header>
@@ -14,9 +13,8 @@
                 <img src="static/img/logo_tomastemarc.png" alt="logo">
             </div>
             <div class="nav-links">
-                <a href="/index"><button>Inicio</button></a>
-                <a href="/producto"><button>Productos</button></a>
-                <a href="/agregar_producto"><button>Agregar Productos</button></a>
+                <a href="/inicio_comprador"><button>Inicio</button></a>
+                <a href="/comprar"><button>Comprar</button></a>
             </div>
         </nav>
     </header>

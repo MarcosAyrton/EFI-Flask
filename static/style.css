@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap");
 
-:root{
+:root {
     --cyan-300: #5bc0de;
     --cyan-400: #31b0d5;
     --cyan-500: #2a9fd6;
@@ -11,6 +11,16 @@
     --gray-500: #b8bcbf;
     --gray-600: #6c757d;
 
+    --blue-100: #bbdefb;
+    --blue-200: #90caf9;
+    --blue-300: #64b5f6;
+    --blue-400: #42a5f5;
+    --blue-500: #2196f3;
+    --blue-600: #1e88e5;
+    --blue-700: #1976d2;
+    --blue-800: #1565c0;
+    --blue-900: #0d47a1;
+
     --indigo-200: #9f7aea;
     --indigo-300: #7e57c2;
     --indigo-400: #673ab7;
@@ -18,45 +28,76 @@
     --indigo-600: #512da8;
 
     --fuente: 'Roboto Condensed';
+
+    --input-focus: #2a9fd6;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: beige;
+    --main-color: black;
 }
 
 
-/* Archivo: styles.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-main {
-    background-color: var(--gray-500);
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f6f5f7;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-family: var(--fuente);
+    min-height: 100vh;
+}
+
+header, footer {
+    width: 100%;
+    background-color: var(--cyan-400);
 }
 
 footer {
-    background-color: var(--cyan-400);
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
+    padding: 1rem;
     font-family: var(--fuente);
 }
 
 nav {
-    background-color: var(--cyan-400);
     padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1320px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: var(--fuente);
 }
 
-h1 {
+
+h1,
+label {
+    font-weight: bold;
     margin: 0;
-    font-size: 1.5rem;
-    font-family: var(--fuente);
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+span {
+    font-size: 12px;
+}
+
+a {
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
 }
 
 .nav-links {
@@ -71,13 +112,17 @@ button {
     color: #ffffff;
     cursor: pointer;
     font-size: 1rem;
-    border-radius: 4px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
     transition: background-color 0.3s;
     font-family: var(--fuente);
 }
 
 button:hover {
-    background-color: var(--indigo-300);
+    background-color: var(--blue-800);
+    box-shadow: 0px 0px var(--blue-700);
+    transform: translate(3px, 3px);
 }
 
 .menu{
@@ -168,4 +213,137 @@ textarea {
 .button-container {
     display: flex;
     justify-content: flex-end;
+}
+
+.title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    color: #ffffff;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+}
+
+.subtitle {
+    margin-top: -10px;
+    margin-left: 30px;
+    font-size: 13px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.card-description {
+    font-size: 1em;
+    color: #666;
+    margin: 0 0 20px 0;
+}
+
+.card-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
+
+.contact {
+    margin-left: 600px;
+}
+
+.about-us {
+    margin-left: 20px;
+
+}
+
+.contact a,
+.about-us a {
+    color: #ffffff;
+}
+
+.contact a:hover,
+.about-us a:hover {
+    color: #000000;
+}
+
+.container-logo img {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+}
+
+.container-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+#slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 33.33%; /* Mostrar tres slides por vez */
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    display: none;
+}
+
+.slide.active {
+    opacity: 1;
+    display: block;
+}
+
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
 }

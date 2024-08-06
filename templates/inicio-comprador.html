@@ -1,0 +1,60 @@
+{% extends "base-client.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block content %}
+    <div class="container-carousel">
+        <div id="slider">
+            <div class="slide">
+            <img src="static/img/..." alt="banner-img-01"></img>
+            </div>
+        </div>
+        <div id="slider">
+            <div class="slide">
+            <img src="static/img/..." alt="banner-img-01"></img>
+            </div>
+        </div>
+        <div id="slider">
+            <div class="slide">
+            <img src="static/img/..." alt="banner-img-01"></img>
+            </div>
+        </div>
+        <div id="slider">
+            <div class="slide">
+            <img src="static/img/..." alt="banner-img-01"></img>
+            </div>
+        </div>
+    </div>
+     <script>
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function prevSlide(){
+            slides[index].classList.remove('active');
+            index--;
+
+            if(index < 0)
+                index = slides.length -1;
+
+            slides[index].classList.add('active');      
+        }
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            prevSlide();
+        });
+
+        function nextSlide(){
+            slides[index].classList.remove('active');
+            index++;
+
+            if(index >= slides.length)
+                index = 0;
+
+            slides[index].classList.add('active');      
+        }
+
+        document.querySelector('.next').addEventListener('click', () => {
+            nextSlide();
+        });
+    </script>
+{% endblock %}

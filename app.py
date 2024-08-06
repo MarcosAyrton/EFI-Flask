@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/Tomastemarc_Cell_DB'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -17,12 +18,52 @@ from models import (
     Caracteristicas,
     Stock,
     Proveedor,
-    Accesorio
+    Accesorio,
+    Usuario
 )
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+@app.route("/", methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        action = request.form.get('action')
+        
+        if action == 'register':
+            username = request.form['username']
+            password = request.form['password']
+            email = request.form['email']
+            
+            existing_user = Usuario.query.filter_by(usuario=username).first()
+            if existing_user:
+                return render_template('login.html', message="El usuario ya está registrado.")
+            
+            new_user = Usuario(usuario=username, contraseña=password, email=email)
+            db.session.add(new_user)
+            db.session.commit()
+            
+            return redirect('/inicio_comprador')
+        
+        elif action == 'login':
+            username = request.form['username-sign-in']
+            print(username)
+            password = request.form['password-sign-in']
+            print(password)
+            user = Usuario.query.filter_by(usuario=username, contraseña=password).first()
+            if user:
+                session['username-sign-in'] = username  # Guardar el nombre de usuario en la sesión
+                return jsonify(success=True)
+            else:
+                return jsonify(success=False, message="Nombre de usuario o contraseña incorrectos.")
+    
+    return render_template('login.html')
+
+@app.route("/inicio_comprador")
+def home():
+    return render_template('inicio-comprador.html')
+
+@app.route("/inicio")
+def homeAdmin():
+    username = session.get('username')  # Recuperar el nombre de usuario de la sesión
+    return render_template('index.html', username=username)
 
 @app.route("/producto")
 def producto():
@@ -32,6 +73,7 @@ def producto():
 @app.route("/agregar_producto", methods=['POST', 'GET'])
 def agregarProductos():
     if request.method == 'POST':
+        # Los datos del formulario
         equipo = request.form['nombre_equipo']
         modelo = request.form['nombre_modelo']
         marca = request.form['nombre_marca']
@@ -102,5 +144,3 @@ def agregarProductos():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-

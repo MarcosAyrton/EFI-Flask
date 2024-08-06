@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap");
+
+:root {
+    --cyan-300: #5bc0de;
+    --cyan-400: #31b0d5;
+    --cyan-500: #2a9fd6;
+    --cyan-600: #1d8bb2;
+
+    --gray-300: #d6d8db;
+    --gray-400: #c6c8ca;
+    --gray-500: #b8bcbf;
+    --gray-600: #6c757d;
+
+    --indigo-200: #9f7aea;
+    --indigo-300: #7e57c2;
+    --indigo-400: #673ab7;
+    --indigo-500: #5e35b1;
+    --indigo-600: #512da8;
+
+    --fuente: 'Roboto Condensed';
+
+    --input-focus: #2a9fd6;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: beige;
+    --main-color: black;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f6f5f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header, footer {
+    width: 100%;
+    background-color: var(--cyan-400);
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-family: var(--fuente);
+}
+
+nav {
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--fuente);
+}
+
+h1,
+label {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+span {
+    font-size: 12px;
+}
+
+a {
+    color: #228be6;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+#red {
+    color: red;
+}
+
+.container-login {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    max-width: 100%;
+    min-height: 468px;;
+}
+
+.form-container form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.social-container {
+    margin: 20px 0;
+}
+
+.social-container a {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+}
+
+.form-container input {
+    background: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #698ebe;
+    background: #698ebe;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+#lila {
+    background: #000a68;
+    border: 1px solid #000a68;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.ghost {
+    background: transparent;
+    border-color: #fff;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.overlay {
+    background: #6f89ff;
+    background: linear-gradient(to right, #305291, #4c73f3) no-repeat 0 0 / cover;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.overlay-left {
+    left: 0;
+    transform: translateX(-20%);
+}
+
+/* Animation */
+
+/* Move signin to the right */
+.container-login.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+
+/* Move overlay to left */
+.container-login.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+/* Bring sign up over sign in */
+.container-login.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+/* Move overlay back to right */
+.container-login.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.container-login.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.container-login.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+/* icon eye */
+.bx {
+    font-size: 20px;
+    margin-left: 220px;
+    transform: translateY(-190%);
+    cursor: pointer;
+}
+
+.container-logo img {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+ul li {
+    display: flex;
+    margin-left: -190px;
+}
+
+.container-icon i {
+    font-size: 24px;
+}
+
+.container-icon {
+    margin-bottom: -90px;
+    margin-right: 100px;
+}
+
+.container-icon i:hover {
+    color: #ffffff;
+}
+
+.contact {
+    margin-left: 600px;
+}
+
+.about-us {
+    margin-left: 20px;
+
+}
+
+.contact a,
+.about-us a {
+    color: #ffffff;
+}
+
+.contact a:hover,
+.about-us a:hover {
+    color: #000000;
+}

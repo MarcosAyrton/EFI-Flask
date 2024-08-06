@@ -1,9 +1,141 @@
-<!-- templates/index.html -->
+
 {% extends "base.html" %}
 
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <h2>Bienvenido a Tomastemarc Cell</h2>
-    <p>Tu tienda en línea de confianza para los mejores celulares.</p>
+    <div class="container-carousel">
+        <p>Últimos pedidos</p>
+        <div id="slider">
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <div class="card-title">
+                        <h1></h1>
+                    </div>
+                    <div class="card-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="show-more">Mostrar más</button>
+
+        <button class="prev">Prev</button>
+        <button class="next">Next</button>
+    </div>
+    <script>
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+    const slidesToShowInitially = 3;
+    const showMoreButton = document.querySelector('.show-more');
+
+    function showSlides() {
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove('active');
+            if (i < slidesToShowInitially) {
+                slides[i].classList.add('active');
+            }
+        }
+    }
+
+    function prevSlide() {
+        slides[index].classList.remove('active');
+        index--;
+
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        slides[index].classList.remove('active');
+        index++;
+
+        if (index > slides.length - 1) {
+            index = 0;
+        }
+
+        slides[index].classList.add('active');
+    }
+
+    function showMoreSlides() {
+        let visibleSlides = document.querySelectorAll('.slide.active');
+        let startIndex = slidesToShowInitially;
+        let endIndex = Math.min(startIndex + 1, slides.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            slides[i].classList.add('active');
+        }
+
+        if (endIndex >= slides.length) {
+            showMoreButton.style.display = 'none'; // Ocultar el botón cuando todos los slides estén visibles
+        }
+    }
+
+    document.querySelector('.prev').addEventListener('click', e => {
+        prevSlide();
+    });
+
+    document.querySelector('.next').addEventListener('click', e => {
+        nextSlide();
+    });
+
+    showMoreButton.addEventListener('click', showMoreSlides);
+
+    // Inicialmente mostrar los primeros tres slides
+    showSlides();
+</script>
+
 {% endblock %}

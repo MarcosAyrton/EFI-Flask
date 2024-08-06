@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style-login.css') }}"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <header>
+      <nav class="menu">
+        <div class="container-logo">
+          <img src="static/img/logo_tomastemarc.png" alt="logo" />
+        </div>
+        <div class="container-icon">
+          <ul>
+            <li>
+              <i class="bx bxl-facebook"></i>
+            </li>
+            <li>
+              <i class="bx bxl-instagram"></i>
+            </li>
+            <li>
+              <i class="bx bxl-linkedin"></i>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container-login" id="container">
+      <div class="form-container sign-up-container">
+        <form id="form-sign-up" action="/" method="POST">
+          <h1 class="container-title-sign-up">Crea tu cuenta</h1>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="username-input"
+            placeholder="Nombre de usuario"
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="email-input"
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="password-input"
+            placeholder="Contraseña"
+          />
+          <i class="bx bx-low-vision" id="showPasswordSignup"></i>
+          <button type="submit" id="lila">Registrar</button>
+        </form>
+      </div>
+      <div class="form-container sign-in-container">
+        <form id="signInForm" action="/" method="POST">
+          <h1 class="container-title-sign-in">Iniciar Sesión</h1>
+          <input
+            type="text"
+            id="username-sign-in"
+            name="username"
+            class="username-input"
+            placeholder="Nombre de usuario"
+          />
+          <input
+            type="password"
+            id="password-sign-in"
+            name="password"
+            class="password-input"
+            placeholder="Contraseña"
+          />
+          <i class="bx bx-low-vision" id="showPasswordSignin"></i>
+          <a href="#">Olvidaste tu contraseña?</a>
+          <button type="submit">Iniciar sesión</button>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>¡Bienvenido!</h1>
+            <p>Inicia sesión con tu cuenta</p>
+            <button class="ghost" id="signIn">Inicia sesión</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hola!!!</h1>
+            <p>Crear tu cuenta</p>
+            <button class="ghost" id="signUp">Registrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 Tomastemarc Cell. Todos los derechos reservados.</p>
+      <div class="contact">
+        <a href="/contacto">Únete a nuestro staff</a>
+      </div>
+      <div class="about-us">
+        <a href="/nosotros">Sobre nosotros</a>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const signUpButton = document.getElementById("signUp");
+        const signInButton = document.getElementById("signIn");
+        const container = document.getElementById("container");
+
+        // Toggle between sign up and sign in panels
+        if (signUpButton && signInButton && container) {
+          signUpButton.addEventListener("click", () => {
+            container.classList.add("right-panel-active");
+          });
+
+          signInButton.addEventListener("click", () => {
+            container.classList.remove("right-panel-active");
+          });
+        }
+
+        // Toggle password visibility
+        const togglePasswordVisibility = (iconId, inputId) => {
+          const showPasswordIcon = document.getElementById(iconId);
+          const passwordInput = document.getElementById(inputId);
+
+          showPasswordIcon.addEventListener("click", () => {
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+              showPasswordIcon.classList.replace("bx-low-vision", "bx-show");
+            } else {
+              passwordInput.type = "password";
+              showPasswordIcon.classList.replace("bx-show", "bx-low-vision");
+            }
+          });
+        };
+
+        togglePasswordVisibility("showPasswordSignup", "password");
+        togglePasswordVisibility("showPasswordSignin", "password-sign-in");
+
+        const validUsers = ["t.admin", "m.admin", "s.admin", "mt.admin"];
+        const validPassword = "itec2024";
+
+        // Handle sign in form submission
+        const signInForm = document.getElementById("signInForm");
+        signInForm.addEventListener("submit", (event) => {
+          event.preventDefault(); // Prevent form submission
+
+          const usernameInput =
+            document.getElementById("username-sign-in").value;
+          const passwordInput =
+            document.getElementById("password-sign-in").value;
+
+          if (usernameInput === "" || passwordInput === "") {
+            alert("Por favor, complete todos los campos para iniciar sesión.");
+            return;
+          }
+
+          if (
+            validUsers.includes(usernameInput) &&
+            passwordInput === validPassword
+          ) {
+            window.location.href = "/inicio";
+          } else {
+            // Send an AJAX request to the server to check the login
+            fetch("/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: new URLSearchParams({
+                username: usernameInput,
+                password: passwordInput,
+                action: "login",
+              }),
+            })
+                
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(response)
+                if (data.success) {
+                  window.location.href = "/inicio_comprador";
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error al iniciar sesión, por favor intente nuevamente.");
+              });
+          }
+        });
+
+        // Fetch registered users and passwords from localStorage
+        const getRegisteredUsers = () =>
+          JSON.parse(localStorage.getItem("registeredUsers")) || [];
+        const getRegisteredPasswords = () =>
+          JSON.parse(localStorage.getItem("registeredPasswords")) || [];
+
+        // Handle sign up form submission
+        const signUpForm = document.getElementById("form-sign-up");
+        signUpForm.addEventListener("submit", (event) => {
+          event.preventDefault(); // Prevent form submission
+
+          const usernameInput = document.getElementById("username").value;
+          const passwordInput = document.getElementById("password").value;
+
+          if (usernameInput === "" || passwordInput === "") {
+            alert("Por favor, complete todos los campos para el registro.");
+            return;
+          }
+
+          if (usernameInput.length < 4 || usernameInput.length > 30) {
+            alert("El nombre de usuario debe tener entre 4 y 30 caracteres.");
+            return;
+          }
+
+          if (passwordInput.length < 4 || passwordInput.length > 30) {
+            alert("La contraseña debe tener entre 4 y 30 caracteres.");
+            return;
+          }
+
+          if (passwordInput.includes(" ")) {
+            alert("La contraseña no puede tener espacios.");
+            return;
+          }
+
+          const registeredUsers = getRegisteredUsers();
+          const registeredPasswords = getRegisteredPasswords();
+
+          registeredUsers.push(usernameInput);
+          registeredPasswords.push(passwordInput);
+
+          localStorage.setItem(
+            "registeredUsers",
+            JSON.stringify(registeredUsers)
+          );
+          localStorage.setItem(
+            "registeredPasswords",
+            JSON.stringify(registeredPasswords)
+          );
+
+          alert("Registro exitoso. Puedes iniciar sesión.");
+        });
+      });
+    </script>
+  </body>
+</html>

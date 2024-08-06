@@ -6,7 +6,7 @@ Agregar Producto
 
 {% block content %}
     <h4 class="title">Agregar Producto</h4>
-    <form action="/agregar_producto" method="post">
+    <form action="/agregar_producto" method="post" id='form'>
     <div class="container container-datos" id="card01" style="display: block;">
         <div class="row">
         <div class="col-6">
@@ -29,7 +29,7 @@ Agregar Producto
                 </li>
             </ul>
             <div class="button-container">
-                <button type="button" class="btn btn-primary button-next" onclick="visibilityCards()">Siguiente</button>
+                <button type="submit" class="btn btn-primary button-next" id='next'>Siguiente</button>
             </div>
         </div>
         </div>
@@ -48,7 +48,7 @@ Agregar Producto
                 </li>
             </ul>
             <div class="button-container">
-                <button type="button" class="btn btn-primary button-next" onclick="visibilityCards()">Siguiente</button>
+                <button type="submit" class="btn btn-primary button-next">Siguiente</button>
             </div>
         </div>
         </div>
@@ -81,7 +81,7 @@ Agregar Producto
                     </li>
                 </ul>
             <div class="button-container">
-                <button type="button" class="btn btn-primary button-next" onclick="visibilityCards()">Siguiente</button>
+                <button type="button" class="btn btn-primary button-next" id='next'>Siguiente</button>
             </div>
         </div>
         </div>
@@ -119,7 +119,7 @@ Agregar Producto
                 </li>
             </ul>
             <div class="button-container">
-                <button type="button" class="btn btn-primary button-next" onclick="visibilityCards()">Siguiente</button>
+                <button type="button" class="btn btn-primary button-next" id='next'>Siguiente</button>
             </div>
         </div>
         </div>
@@ -141,7 +141,7 @@ Agregar Producto
                 </li>
             </ul>
             <div class="button-container">
-                <button type="button" class="btn btn-primary button-next" onclick="visibilityCards()">Siguiente</button>
+                <button type="submit" class="btn btn-primary button-next" id='next'>Siguiente</button>
             </div>
         </div>
         </div>
@@ -179,12 +179,171 @@ Agregar Producto
                 <option value="si">Si</option>
                 <option value="no">No</option>
             </select>
-            <div class="button-container">
-                <button type="submit" class="btn btn-primary">Agregar Producto</button>
-            </div>
+                <button type="submit" class="btn btn-primary" id='finalButton'>Agregar Producto</button>
         </div>
         </div>
     </div>
     </form>
-    <script {{ url_for('static', filename='js/script01.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Función de validación
+    function validateForm() {
+        let isValid = true;
+
+        // Recuperamos la información ingresada y validamos
+        const productName = document.getElementById('nombre_equipo').value;
+        if (!productName) {
+            isValid = false;
+            window.alert('Debe completar el nombre del equipo');
+        }
+
+        const modelName = document.getElementById('nombre_modelo').value;
+        if (!modelName) {
+            isValid = false;
+            window.alert('Debe completar el nombre del modelo');
+        }
+
+        const brandName = document.getElementById('nombre_marca').value;
+        if (!brandName) {
+            isValid = false;
+            window.alert('Debe completar el nombre de la marca');
+        }
+
+        const textarea = document.getElementById('descripcion_del_equipo').value;
+        const maxCaracteres = 100;
+
+        if (textarea.length > maxCaracteres) {
+            isValid = false;
+            window.alert('Se superó el límite establecido de caracteres');
+        }
+
+        const manufacturerName = document.getElementById('nombre_fabricante').value;
+        if (!manufacturerName) {
+            isValid = false;
+            window.alert('Debe completar el nombre del fabricante');
+        }
+
+        const manufacturerCountry = document.getElementById('pais_del_fabricante').value;
+        if (!manufacturerCountry.match(/^[a-zA-Z\s]+$/)) {
+            isValid = false;
+            window.alert('El país del fabricante solo debe contener letras');
+        }
+
+        // Verificación del precio
+        const precio = parseFloat(document.getElementById('precio').value);
+        if (isNaN(precio) || precio < 50000 || precio > 300000) {
+            isValid = false;
+            window.alert('El precio debe estar entre 50,000 y 300,000');
+        }
+
+        // Verificación de la cantidad de equipos
+        const cantEquipo = parseInt(document.getElementById('cantidad_equipo').value);
+        if (isNaN(cantEquipo) || cantEquipo < 0 || cantEquipo > 1000) {
+            isValid = false;
+            window.alert('La cantidad debe estar entre 0 y 1000');
+        }
+
+        // Verificación del stock
+        const stockSelect = document.getElementById('stock').value;
+        if (stockSelect === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        }
+
+        // Validación del color
+        const arrayColors = ["rojo", "verde", "azul", "amarillo", "naranja", "morado", "rosa", "marrón", "negro", "blanco"];
+        const color = document.getElementById('color').value.toLowerCase();
+        if (!arrayColors.includes(color)) {
+            isValid = false;
+            window.alert('La opción ingresada para el color no es válida');
+        }
+        
+        const cantCam = document.getElementById('camara').value
+        if(cantCam < 0 || cantCam > 3) {
+            isValid = false;
+            window.alert('La cantidad de cámaras ingresadas no es válida. Por favor, inténtalo de nuevo.');
+        }
+
+        const tipoSoftware = document.getElementById('tipo_software').value;
+        if(tipoSoftware === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        } 
+
+        const cargador = document.getElementById('cargador').value;
+        if(cargador === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        }
+
+        const auriculares = document.getElementById('auriculares').value;
+        if(auriculares === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        }
+
+        const funda = document.getElementById('funda').value;
+        if(funda === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        }
+
+        const protector = document.getElementById('protector').value;
+        if(protector === '-') {
+            isValid = false;
+            window.alert('Seleccione una opción válida');
+        }
+
+        return isValid;
+    }
+
+    // Validar el formulario al enviar
+    document.getElementById('form').addEventListener('submit', (event) => {
+        if (!validateForm()) {
+            event.preventDefault(); // Previene el envío del formulario si no es válido
+        }
+    });
+
+    // Limitar caracteres especiales en el campo "pais del fabricante"
+    document.getElementById('pais_del_fabricante').addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    // Limitar caracteres especiales en el campo "ubicacion del equipo"
+    document.getElementById('ubicacion_del_equipo').addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('pantalla_tamaño').addEventListener('input', function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('bateria').addEventListener('input', function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('cpu')document.addEventListener('input', function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('nombre_proveedor').addEventListener('input', function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('numero_de_prov').addEventListener('input', function(){
+        // Elimina todo lo que no sean dígitos
+        this.value = this.value.replace(/\D/g, '');
+
+        // Limita la longitud a 10 dígitos
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10);
+        }
+    })
+
+    document.getElementById('provincia_prov').addEventListener('input', function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    })
+
+});
+    </script>
 {% endblock %}
