@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -32,29 +32,31 @@ def producto():
 @app.route("/agregar_producto", methods=['POST', 'GET'])
 def agregarProductos():
     if request.method == 'POST':
-        equipo = request.form['nombre_equipo']
-        modelo = request.form['nombre_modelo']
-        marca = request.form['nombre_marca']
-        fabricante = request.form['nombre_fabricante']
-        color = request.form['color']
-        pantalla = request.form['pantalla_tamaño']
-        bateria = request.form['bateria']
-        camara = request.form['camara']
-        cpu = request.form['cpu']
-        software = request.form['tipo_software']
-        stock = request.form['stock']
-        precio = request.form['precio']
-        cargador = request.form['cargador']
-        auriculares = request.form['auriculares']
-        funda = request.form['funda']
-        ubicacion = request.form['ubicacion_del_equipo']
-        protector = request.form['protector']
-        pais = request.form['pais_del_fabricante']
-        descripcion_equipo = request.form['descripcion_del_equipo']
-        cantidad = request.form['cantidad_equipo']
-        provincia = request.form['provincia_prov']
-        num_prov = request.form['numero_de_prov']
-        nombre_proveedor = request.form['nombre_proveedor']
+        data = request.get_json() if request.is_json else request.form
+        
+        equipo = data.get('nombre_equipo')
+        modelo = data.get('nombre_modelo')
+        marca = data.get('nombre_marca')
+        fabricante = data.get('nombre_fabricante')
+        color = data.get('color')
+        pantalla = data.get('pantalla_tamaño')
+        bateria = data.get('bateria')
+        camara = data.get('camara')
+        cpu = data.get('cpu')
+        software = data.get('tipo_software')
+        stock = data.get('stock')
+        precio = data.get('precio')
+        cargador = data.get('cargador')
+        auriculares = data.get('auriculares')
+        funda = data.get('funda')
+        ubicacion = data.get('ubicacion_del_equipo')
+        protector = data.get('protector')
+        pais = data.get('pais_del_fabricante')
+        descripcion_equipo = data.get('descripcion_del_equipo')
+        cantidad = data.get('cantidad_equipo')
+        provincia = data.get('provincia_prov')
+        num_prov = data.get('numero_de_prov')
+        nombre_proveedor = data.get('nombre_proveedor')
 
         # Buscar o crear las instancias de los modelos relacionados
         fabricante_db = Fabricante.query.filter_by(nombre=fabricante).first()
@@ -97,10 +99,11 @@ def agregarProductos():
         db.session.add(equipo_db)
         db.session.commit()
 
-        return redirect('/producto')
+        if request.is_json:
+            return jsonify({"message": "Producto agregado correctamente"}), 201
+        else:
+            return redirect('/producto')
     return render_template('agregar_producto.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-

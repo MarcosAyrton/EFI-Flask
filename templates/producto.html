@@ -3,33 +3,35 @@
 {% block title %}Lista de Productos{% endblock %}
 
 {% block content %}
-    <h2>Lista de Productos</h2>
-    <table>
+<div class="containerProducto">
+    <h2 class="tituloProducto">Lista de Productos <br><span>Aqui apareceran todos los productos agregados</span></h2>
+    <table class="tablaProducto">
         <thead>
             <tr>
-                <th>Marca</th>
-                <th>Equipo</th>
-                <th>Modelo</th>
-                <th>Fabricante</th>
-                <th>Accesorios</th>
-                <th>Costo</th>
-                <th>Proveedor</th>
-                <th>Stock</th>
+                <th class="tablaProducto__header">Marca</th>
+                <th class="tablaProducto__header">Equipo</th>
+                <th class="tablaProducto__header">Modelo</th>
+                <th class="tablaProducto__header">Fabricante</th>
+                <th class="tablaProducto__header">Accesorios</th>
+                <th class="tablaProducto__header">Costo</th>
+                <th class="tablaProducto__header">Proveedor</th>
+                <th class="tablaProducto__header">Stock</th>
             </tr>
         </thead>
         <tbody>
             {% for equipo in equipos %}
-            <tr>
-                <td>{{ equipo.marca }}</td>
-                <td>{{ equipo.nombre }}</td>
-                <td>{{ equipo.modelo }}</td>
-                <td>{{ equipo.fabricante }}</td>
-                <td>{{ equipo.accesorios }}</td>
-                <td>{{ equipo.costo }}</td>
-                <td>{{ equipo.proveedor }}</td>
-                <td>{{ equipo.stock }}</td>
+            <tr class="tablaProducto__fila">
+                <td class="tablaProducto__dato">{{ equipo.marca }}</td>
+                <td class="tablaProducto__dato">{{ equipo.nombre }}</td>
+                <td class="tablaProducto__dato">{{ equipo.modelo }}</td>
+                <td class="tablaProducto__dato">{{ equipo.fabricante }}</td>
+                <td class="tablaProducto__dato">{{ equipo.accesorios }}</td>
+                <td class="tablaProducto__dato">{{ equipo.costo }}</td>
+                <td class="tablaProducto__dato">{{ equipo.proveedor }}</td>
+                <td class="tablaProducto__dato">{{ equipo.stock }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}

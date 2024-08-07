@@ -6,7 +6,7 @@ Agregar Producto
 
 {% block content %}
 <h4 class="title">Agregar Producto</h4>
-<form id="productoForm">
+<form id="productoForm" method="POST" action="/agregar_producto">
     <div id="card01" class="container" >
         <div class="row">
             <div class="col-6 form">
@@ -187,48 +187,204 @@ Agregar Producto
     </div>
 </form>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const cards = [
-            document.getElementById("card01"),
-            document.getElementById("card02"),
-            document.getElementById("card03"),
-            document.getElementById("card04"),
-            document.getElementById("card05"),
-            document.getElementById("card06")
-        ];
-
-        let currentCardIndex = 0;
-
-        const saveDataToLocalStorage = (cardIndex) => {
-            const inputs = cards[cardIndex].querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                localStorage.setItem(input.id, input.value);
-            });
-        };
-
-        const showNextCard = () => {
-            cards[currentCardIndex].style.display = 'none';
-            currentCardIndex++;
-            if (currentCardIndex < cards.length) {
-                cards[currentCardIndex].style.display = 'block';
-            }
-        };
-
-        const attachNextButtonListener = (buttonId, cardIndex) => {
-            document.getElementById(buttonId).addEventListener('click', (e) => {
-                e.preventDefault();
-                saveDataToLocalStorage(cardIndex);
-                showNextCard();
-            });
-        };
-
-        attachNextButtonListener('next01', 0);
-        attachNextButtonListener('next02', 1);
-        attachNextButtonListener('next03', 2);
-        attachNextButtonListener('next04', 3);
-        attachNextButtonListener('next05', 4);
-
+   document.addEventListener('DOMContentLoaded', (event) => {
+    let currentCard = 1;
+    const totalCards = 6;
+    
+    // Function to show the current card and hide others
+    function showCard(cardNumber) {
+        for (let i = 1; i <= totalCards; i++) {
+            document.getElementById(`card0${i}`).style.display = i === cardNumber ? 'block' : 'none';
+        }
+    }
+    
+    // Initial display
+    showCard(currentCard);
+    
+    // Function to validate card 1
+    function validateCard1() {
+        const nombreEquipo = document.getElementById('nombre_equipo').value.trim();
+        const nombreModelo = document.getElementById('nombre_modelo').value.trim();
+        const nombreMarca = document.getElementById('nombre_marca').value.trim();
         
+        if (!nombreEquipo || !nombreModelo || !nombreMarca) {
+            alert('Por favor, complete todos los campos de Datos Basicos del Dispositivo.');
+            return false;
+        }
+        return true;
+    }
+
+    // Function to validate card 2
+    function validateCard2() {
+        const nombreFabricante = document.getElementById('nombre_fabricante').value.trim();
+        const paisFabricante = document.getElementById('pais_del_fabricante').value.trim();
+        
+        if (!nombreFabricante || !paisFabricante) {
+            alert('Por favor, complete todos los campos de Datos del Fabricante.');
+            return false;
+        }
+        return true;
+    }
+
+    // Function to validate card 3
+    function validateCard3() {
+        const precio = document.getElementById('precio').value.trim();
+        const ubicacionEquipo = document.getElementById('ubicacion_del_equipo').value.trim();
+        const cantidadEquipo = document.getElementById('cantidad_equipo').value.trim();
+        const stock = document.getElementById('stock').value;
+        
+        if (!precio || !ubicacionEquipo || !cantidadEquipo || stock === '-') {
+            alert('Por favor, complete todos los campos de Stock y Disponibilidad.');
+            return false;
+        }
+        return true;
+    }
+
+    // Function to validate card 4
+    function validateCard4() {
+        const color = document.getElementById('color').value.trim();
+        const pantallaTamaño = document.getElementById('pantalla_tamaño').value.trim();
+        const bateria = document.getElementById('bateria').value.trim();
+        const camara = document.getElementById('camara').value.trim();
+        const cpu = document.getElementById('cpu').value.trim();
+        const tipoSoftware = document.getElementById('tipo_software').value;
+        
+        if (!color || !pantallaTamaño || !bateria || !camara || !cpu || tipoSoftware === '-') {
+            alert('Por favor, complete todos los campos de Características del dispositivo.');
+            return false;
+        }
+        return true;
+    }
+
+    // Function to validate card 5
+    function validateCard5() {
+        const nombreProveedor = document.getElementById('nombre_proveedor').value.trim();
+        const numeroProveedor = document.getElementById('numero_de_prov').value.trim();
+        const provinciaProveedor = document.getElementById('provincia_prov').value.trim();
+        
+        if (!nombreProveedor || !numeroProveedor || !provinciaProveedor) {
+            alert('Por favor, complete todos los campos de Datos del proveedor.');
+            return false;
+        }
+        return true;
+    }
+
+    // Function to validate card 6
+    function validateCard6() {
+        const cargador = document.getElementById('cargador').value;
+        const auriculares = document.getElementById('auriculares').value;
+        const funda = document.getElementById('funda').value;
+        const protector = document.getElementById('protector').value;
+        
+        if (cargador === '-' || auriculares === '-' || funda === '-' || protector === '-') {
+            alert('Por favor, complete todos los campos de Accesorios.');
+            return false;
+        }
+        return true;
+    }
+
+    // Attach event listeners to the "Siguiente" buttons
+    document.getElementById('next01').addEventListener('click', () => {
+        if (validateCard1()) {
+            currentCard++;
+            showCard(currentCard);
+        }
     });
+
+    document.getElementById('next02').addEventListener('click', () => {
+        if (validateCard2()) {
+            currentCard++;
+            showCard(currentCard);
+        }
+    });
+
+    document.getElementById('next03').addEventListener('click', () => {
+        if (validateCard3()) {
+            currentCard++;
+            showCard(currentCard);
+        }
+    });
+
+    document.getElementById('next04').addEventListener('click', () => {
+        if (validateCard4()) {
+            currentCard++;
+            showCard(currentCard);
+        }
+    });
+
+    document.getElementById('next05').addEventListener('click', () => {
+        if (validateCard5()) {
+            currentCard++;
+            showCard(currentCard);
+        }
+    });
+
+    // Final submission
+    document.getElementById('productoForm').addEventListener('submit', (event) => {
+        if (!validateCard6()) {
+            event.preventDefault();
+        } else {
+            // You can add additional code here to handle form submission,
+            // e.g., collecting all data and sending it via AJAX to your backend.
+            alert('Formulario enviado con éxito');
+        }
+    });
+});
+
+document.getElementById('finalButton').addEventListener('click', function(event) {
+    event.preventDefault();  // Evita el envío estándar del formulario
+
+    // Recopilar los datos de localStorage
+    let productoData = {
+        nombre_equipo: localStorage.getItem('nombre_equipo'),
+        nombre_modelo: localStorage.getItem('nombre_modelo'),
+        nombre_marca: localStorage.getItem('nombre_marca'),
+        nombre_fabricante: localStorage.getItem('nombre_fabricante'),
+        color: localStorage.getItem('color'),
+        pantalla_tamaño: localStorage.getItem('pantalla_tamaño'),
+        bateria: localStorage.getItem('bateria'),
+        camara: localStorage.getItem('camara'),
+        cpu: localStorage.getItem('cpu'),
+        tipo_software: localStorage.getItem('tipo_software'),
+        stock: localStorage.getItem('stock'),
+        precio: localStorage.getItem('precio'),
+        cargador: localStorage.getItem('cargador'),
+        auriculares: localStorage.getItem('auriculares'),
+        funda: localStorage.getItem('funda'),
+        ubicacion_del_equipo: localStorage.getItem('ubicacion_del_equipo'),
+        protector: localStorage.getItem('protector'),
+        pais_del_fabricante: localStorage.getItem('pais_del_fabricante'),
+        descripcion_del_equipo: localStorage.getItem('descripcion_del_equipo'),
+        cantidad_equipo: localStorage.getItem('cantidad_equipo'),
+        provincia_prov: localStorage.getItem('provincia_prov'),
+        numero_de_prov: localStorage.getItem('numero_de_prov'),
+        nombre_proveedor: localStorage.getItem('nombre_proveedor')
+    };
+
+    // Enviar los datos al servidor usando fetch
+    fetch('/agregar_producto', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productoData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error en la respuesta del servidor.');
+        }
+    })
+    .then(data => {
+        console.log('Producto agregado:', data);
+        window.location.href = '/producto';  // Redirigir después de agregar el producto
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
 </script>
+
 {% endblock %}
