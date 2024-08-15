@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+<div class="containerProducto">
+    <h2 class="tituloProducto">Lista de Productos <br><span>Aqui apareceran todos los productos agregados</span></h2>
+    <table class="tablaProducto">
+        <thead>
+            <tr>
+                <th class="tablaProducto__header">Marca</th>
+                <th class="tablaProducto__header">Equipo</th>
+                <th class="tablaProducto__header">Modelo</th>
+                <th class="tablaProducto__header">Fabricante</th>
+                <th class="tablaProducto__header">Accesorios</th>
+                <th class="tablaProducto__header">Costo</th>
+                <th class="tablaProducto__header">Proveedor</th>
+                <th class="tablaProducto__header">Stock</th>
+                <th class="tablaProducto__header"></th>
+                <th class="tablaProducto__header"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr class="tablaProducto__fila">
+                <td class="tablaProducto__dato">{{ equipo.marca }}</td>
+                <td class="tablaProducto__dato">{{ equipo.nombre }}</td>
+                <td class="tablaProducto__dato">{{ equipo.modelo }}</td>
+                <td class="tablaProducto__dato">{{ equipo.fabricante }}</td>
+                <td class="tablaProducto__dato">{{ equipo.accesorios }}</td>
+                <td class="tablaProducto__dato">{{ equipo.costo }}</td>
+                <td class="tablaProducto__dato">{{ equipo.proveedor }}</td>
+                <td class="tablaProducto__dato">{{ equipo.stock }}</td>
+                <td>
+                    <button class="button-edit" type="button" id="buttonEdit-{{ equipo.id }}" onclick="buttonEdit('{{ equipo.id }}')">Editar</button>
+                    <div class="overlay" id="overlayEdit-{{ equipo.id }}" style="display: none;">
+                        <div class="card-producto" id="cardEdit-{{ equipo.id }}" style="display: none;">
+                            <form action="/producto/{{ equipo.id }}" method="POST">
+                                <input type="hidden" name="accion" value="actualizar">
+                                <p>Editar datos de {{ equipo.nombre }}</p>
+                                <input type="text" name="nombre_equipo" value="{{ equipo.nombre }}" placeholder="Nombre del equipo" required>
+                                <input type="text" name="nombre_modelo" value="{{ equipo.modelo.nombre }}" placeholder="Nombre del modelo" required>
+                                <input type="text" name="nombre_marca" value="{{ equipo.marca.nombre }}" placeholder="Nombre de la marca" required>
+                                <input type="text" name="nombre_fabricante" value="{{ equipo.fabricante.nombre }}" placeholder="Nombre del fabricante" required>
+                                <input type="text" name="color" value="{{ equipo.caracteristicas.color }}" placeholder="Color" required>
+                                <input type="text" name="pantalla_tamaño" value="{{ equipo.caracteristicas.pantalla }}" placeholder="Tamaño de pantalla" required>
+                                <input type="text" name="bateria" value="{{ equipo.caracteristicas.bateria }}" placeholder="Batería" required>
+                                <input type="text" name="camara" value="{{ equipo.caracteristicas.camara }}" placeholder="Cámara" required>
+                                <input type="text" name="cpu" value="{{ equipo.caracteristicas.cpu }}" placeholder="CPU" required>
+                                <input type="text" name="tipo_software" value="{{ equipo.caracteristicas.software }}" placeholder="Tipo de software" required>
+                                <input type="number" name="cantidad_equipo" value="{{ equipo.stock.cantidad }}" placeholder="Cantidad" required>
+                                <input type="text" name="ubicacion_del_equipo" value="{{ equipo.stock.ubicacion }}" placeholder="Ubicación del equipo" required>
+                                <input type="text" name="precio" value="{{ equipo.costo }}" placeholder="Precio" required>
+                                <input type="text" name="nombre_proveedor" value="{{ equipo.proveedor.nombre }}" placeholder="Nombre del proveedor" required>
+                                <input type="text" name="numero_de_prov" value="{{ equipo.proveedor.num_telefono }}" placeholder="Número de teléfono del proveedor" required>
+                                <input type="text" name="provincia_prov" value="{{ equipo.proveedor.provincia }}" placeholder="Provincia del proveedor" required>
+                                <input type="checkbox" name="cargador" {% if equipo.accesorios.cargador %}checked{% endif %}> Cargador
+                                <input type="checkbox" name="auriculares" {% if equipo.accesorios.auriculares %}checked{% endif %}> Auriculares
+                                <input type="checkbox" name="funda" {% if equipo.accesorios.funda %}checked{% endif %}> Funda
+                                <input type="checkbox" name="protector" {% if equipo.accesorios.protector_de_pantalla %}checked{% endif %}> Protector de pantalla
+                                <button class="button-edit" type="submit">Actualizar</button>
+                            </form>
+                            <button class="button-edit cancel-button" type="button" onclick="buttonNo('{{ equipo.id }}', 'Edit')">Cancelar</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button class="button-edit" type="button" id="buttonDelete-{{ equipo.id }}" onclick="buttonDelete('{{ equipo.id }}')">Eliminar</button>
+                    <div class="overlay" id="overlayDelete-{{ equipo.id }}" style="display: none;">
+                        <div class="card-producto card-delete" id="cardDelete-{{ equipo.id }}" style="display: none;">
+                            <p>¿Está seguro de que desea eliminar el equipo: {{ equipo.nombre }}?</p>
+                            <form action="/producto/{{ equipo.id }}" method="POST">
+                                <input type="hidden" name="accion" value="eliminar">
+                                <button class="button-edit" type="submit">Sí</button>
+                            </form>
+                            <button class="button-edit cancel-button" type="button" onclick="buttonNo('{{ equipo.id }}', 'Delete')">Cancelar</button>
+                        </div>
+                    </div>
+                </td>                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function buttonDelete(equipoId) {
+        const overlay = document.getElementById('overlayDelete-' + equipoId);
+        const card = document.getElementById('cardDelete-' + equipoId);
+        overlay.style.display = "block";
+        card.style.display = "block";
+    }
+
+    function buttonNo(equipoId, action) {
+        const overlay = document.getElementById('overlay' + action + '-' + equipoId);
+        const card = document.getElementById('card' + action + '-' + equipoId);
+        overlay.style.display = "none";
+        card.style.display = "none";
+    }
+
+    function buttonEdit(equipoId) {
+        const overlay = document.getElementById('overlayEdit-' + equipoId);
+        const card = document.getElementById('cardEdit-' + equipoId);
+        overlay.style.display = "block";
+        card.style.display = "block";
+    }
+</script>
+{% endblock %}

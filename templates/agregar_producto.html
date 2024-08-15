@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+
+{% block title %} 
+Agregar Producto
+{% endblock %}
+
+{% block content %}
+<h4 class="title">Agregar Producto</h4>
+<form id="productoForm" method="POST" action="/agregar_producto">
+    <div id="card01" class="container" >
+        <div class="row">
+            <div class="col-6 form">
+               <div class="title">Datos Basicos del Dispositivo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_equipo" name="nombre_equipo" class="form-nombre input" placeholder="Nombre del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="nombre_modelo" name="nombre_modelo" class="form-modelo input" placeholder="Nombre del modelo">
+                    </li>
+                    <li>
+                        <input type="text" id="nombre_marca" name="nombre_marca" class="form-marca input" placeholder="Nombre de la marca">
+                    </li>
+                </ul>
+                <div class="title">Descripcion del Equipo: <br><span>Comente unos detalles del equipo.</span></div>
+                <ul>
+                    <li>
+                        <textarea id="descripcion_del_equipo" name="descripcion_del_equipo" rows="4" cols="50" class="input"></textarea>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next01">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="card02" style="display: none;">
+        <div class="row">
+            <div class="col-6 form">
+                <div class="title">Datos del Fabricante: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_fabricante" name="nombre_fabricante" class="input form-fabricante mb-2" placeholder="Nombre del fabricante">
+                    </li>
+                    <li>
+                        <input type="text" id="pais_del_fabricante" name="pais_del_fabricante" class="input form-pais mb-2" placeholder="País del fabricante">
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next02">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="card03" style="display: none;">
+        <div class="row">
+            <div class="col-6 form">
+                <div class="title">Stock: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="number" id="precio" name="precio" min="50000" max="300000" class="input form-precio mb-2" placeholder="Precio del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="ubicacion_del_equipo" name="ubicacion_del_equipo" class="input form-ubi mb-2" placeholder="Ubicación del equipo">
+                    </li>
+                    <li>
+                        <input type="number" id="cantidad_equipo" name="cantidad_equipo" min="0" max="1000" class="input form-cant mb-2" placeholder="Cantidad del producto">
+                    </li>
+                </ul>
+
+                <div class="title">Disponibilidad: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <select id="stock" name="stock" class="input form-control mb-2">
+                            <option value="-">-</option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next03">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="card04" style="display: none;">
+        <div class="row">
+            <div class="col-6 form">
+                <div class="title">Características del dispositivo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="color" name="color" class="input form-color" placeholder="Color del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="pantalla_tamaño" name="pantalla_tamaño" class="input form-pantalla" placeholder="Pantalla del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="bateria" name="bateria" class="input form-bateria" placeholder="Batería del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="camara" name="camara" class="input form-camara" placeholder="Cámara del equipo">
+                    </li>
+                    <li>
+                        <input type="text" id="cpu" name="cpu" class="input form-cpu" placeholder="CPU del equipo">
+                    </li>
+                </ul>
+                <div class="title">Tipo de sistema operativo: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <select id="tipo_software" name="tipo_software" class="input form-control mb-2">
+                            <option value="-">-</option>
+                            <option value="Ios">Ios</option>
+                            <option value="Android">Android</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next04">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="card05" style="display: none;">
+        <div class="row">
+            <div class="col-6 form">
+                <div class="title">Datos del proveedor: <br><span>Por favor complete todos los campos.</span></div>
+                <ul>
+                    <li>
+                        <input type="text" id="nombre_proveedor" name="nombre_proveedor" class="input form-nombre-prov" placeholder="Nombre del proveedor">
+                    </li>
+                    <li>
+                        <input type="tel" id="numero_de_prov" name="numero_de_prov" class="input form-num-prov" placeholder="Número del proveedor">
+                    </li>
+                    <li>
+                        <input type="text" id="provincia_prov" name="provincia_prov" class="input form-provincia" placeholder="Provincia del proveedor">
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="button-confirm" id="next05">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="card06" style="display: none;">
+        <div class="row">
+            <div class="col-6 form">
+                <div class="title">Accesorios: <br><span>Por favor complete todos los campos.</span></div>
+
+                <div class="title"><span>Cargador</span></div>
+                <select id="cargador" name="cargador" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+
+                <div class="title"><span>Auriculares:</span></div>
+                <select id="auriculares" name="auriculares" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+
+                <div class="title"><span>Funda:</span></div>
+                <select id="funda" name="funda" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+
+                <div class="title"><span>Protector:</span></div>
+                <select id="protector" name="protector" class="input form-control mb-2">
+                    <option value="-">-</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+                <div class="button-container">
+                    <button type="submit" class="button-confirm" id="finalButton">Agregar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let currentCard = 1;
+        const totalCards = 6;
+
+        function showCard(cardNumber) {
+            for (let i = 1; i <= totalCards; i++) {
+                let cardId = 'card0' + i;
+                document.getElementById(cardId).style.display = i === cardNumber ? 'block' : 'none';
+            }
+        }
+
+        // Mostrar la primera tarjeta al cargar la página
+        showCard(currentCard);
+
+        // Validar card 1
+        function validateCard1() {
+            const nombreEquipo = document.getElementById('nombre_equipo').value.trim();
+            const nombreModelo = document.getElementById('nombre_modelo').value.trim();
+            const nombreMarca = document.getElementById('nombre_marca').value.trim();
+            
+            if (!nombreEquipo || !nombreModelo || !nombreMarca) {
+                alert('Por favor, complete todos los campos de Datos Basicos del Dispositivo.');
+                return false;
+            }
+            return true;
+        }
+
+        // Validar card 2
+        function validateCard2() {
+            const nombreFabricante = document.getElementById('nombre_fabricante').value.trim();
+            const paisFabricante = document.getElementById('pais_del_fabricante').value.trim();
+
+            if (!nombreFabricante || !paisFabricante) {
+                alert('Por favor, complete todos los campos de Datos del Fabricante.');
+                return false;
+            }
+            return true;
+        }
+
+        // Validar card 3
+        function validateCard3() {
+            const precio = document.getElementById('precio').value.trim();
+            const ubicacion = document.getElementById('ubicacion_del_equipo').value.trim();
+            const cantidad = document.getElementById('cantidad_equipo').value.trim();
+
+            if (!precio || !ubicacion || !cantidad) {
+                alert('Por favor, complete todos los campos de Stock y Disponibilidad.');
+                return false;
+            }
+            return true;
+        }
+
+        // Validar card 4
+        function validateCard4() {
+            const color = document.getElementById('color').value.trim();
+            const pantalla = document.getElementById('pantalla_tamaño').value.trim();
+            const bateria = document.getElementById('bateria').value.trim();
+            const camara = document.getElementById('camara').value.trim();
+            const cpu = document.getElementById('cpu').value.trim();
+
+            if (!color || !pantalla || !bateria || !camara || !cpu) {
+                alert('Por favor, complete todos los campos de Características del Dispositivo.');
+                return false;
+            }
+            return true;
+        }
+
+        // Validar card 5
+        function validateCard5() {
+            const nombreProveedor = document.getElementById('nombre_proveedor').value.trim();
+            const numeroProv = document.getElementById('numero_de_prov').value.trim();
+            const provinciaProv = document.getElementById('provincia_prov').value.trim();
+
+            if (!nombreProveedor || !numeroProv || !provinciaProv) {
+                alert('Por favor, complete todos los campos de Datos del Proveedor.');
+                return false;
+            }
+            return true;
+        }
+
+        // Validar card 6
+        function validateCard6() {
+            // Si deseas agregar validaciones específicas para la última tarjeta
+            return true;
+        }
+
+        // Manejadores de eventos para los botones "Siguiente"
+        document.getElementById('next01').addEventListener('click', () => {
+            if (validateCard1()) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        });
+
+        document.getElementById('next02').addEventListener('click', () => {
+            if (validateCard2()) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        });
+
+        document.getElementById('next03').addEventListener('click', () => {
+            if (validateCard3()) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        });
+
+        document.getElementById('next04').addEventListener('click', () => {
+            if (validateCard4()) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        });
+
+        document.getElementById('next05').addEventListener('click', () => {
+            if (validateCard5()) {
+                currentCard++;
+                showCard(currentCard);
+            }
+        });
+
+        // Manejo de envío final
+        document.getElementById('finalButton').addEventListener('click', function() {
+        // Validar si todos los campos han sido completados
+        if (!validateCard6()) {
+        return;
+    }
+
+    document.getElementById('productoForm').submit();  // Enviar el formulario tradicionalmente
+});
+
+    });
+</script>
+
+{% endblock %}

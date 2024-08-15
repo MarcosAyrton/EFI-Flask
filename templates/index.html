@@ -1,9 +1,39 @@
 <!-- templates/index.html -->
 {% extends "base.html" %}
 
-{% block title %}Bienvenido a Tomastemarc Cell{% endblock %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <h2>Bienvenido a Tomastemarc Cell</h2>
-    <p>Tu tienda en línea de confianza para los mejores celulares.</p>
+<div class="containerIndex">
+    
+    <div class="containerCard">
+        <div class="card">
+            <img src="static/img/agregar_productos.png" alt="banner">
+            <div class="card__content">
+              <p class="card__title">Funcion para agregar productos.</p>
+              <p class="card__description">Implementamos una pestaña para poder agregar los productos que necesita de una manera sencilla, practica y eficaz.</p>
+            </div>
+          </div>
+    </div>
+    
+    <div class="containerCard">
+        <div class="card">
+            <img src="static/img/productos.png" alt="banner">
+            <div class="card__content">
+              <p class="card__title">Apartado con un listado de productos.</p>
+              <p class="card__description">Agregamos un apartado donde se puede ver una lista de todos los productos agregados mas su informacion necesaria.</p>
+            </div>
+          </div>
+    </div>
+
+    <div class="containerCard">
+        <div class="card">
+            <img src="static/img/crud.png" alt="banner">
+            <div class="card__content">
+              <p class="card__title">Sistema CRUD.</p>
+              <p class="card__description">Aplicamos el sistema CRUD (Create, Read, Update, Delete), el cual permite modificar, eliminar, acualizar informacion o crearla sobre equipos ya agregados.</p>
+            </div>
+          </div>
+    </div>
+</div>
 {% endblock %}
